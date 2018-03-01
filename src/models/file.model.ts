@@ -1,25 +1,27 @@
 import * as mongoose from 'mongoose';
 
 export interface IFile {
-    //Mongo id
+    // Mongo id
     id?: string;
-    //name, title
+    // name, title
     name: string;
-    //type: file or folder, true is file, false is folder
+    // type: file or folder, true is file, false is folder
     isFile: boolean;
-    //path of file, empty for folder
+    // path of file, empty for folder
     path?: string;
-    //file type of file, empty for folder
+    // file type of file, empty for folder
     format?: string;
-    //for indexing
+    // for indexing
     index: string;
-    //mark deleted of not
+    // mark deleted of not
     deleted: boolean;
-    //content of document
+    // content of document
     content: string;
 }
 
-export interface IFileModel extends IFile, mongoose.Document { };
+export interface IFileModel extends IFile, mongoose.Document {
+    id?: string;
+ }
 
 const fileSchema = new mongoose.Schema(
     {
@@ -29,11 +31,11 @@ const fileSchema = new mongoose.Schema(
         },
         path: {
             type: String,
-            default: ""
+            default: ''
         },
         content: {
             type: String,
-            default: "\n"
+            default: '\n'
         },
         format: {
             type: String
@@ -53,7 +55,7 @@ const fileSchema = new mongoose.Schema(
     }
 );
 
-fileSchema.index({content: 'text', name: 'text'});
+fileSchema.index({ content: 'text', name: 'text' });
 fileSchema.virtual('id').get(() => this._id.toHexString());
 
 export const FileModel = mongoose.model<IFileModel>('file', fileSchema);
