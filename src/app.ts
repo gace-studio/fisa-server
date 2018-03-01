@@ -23,7 +23,7 @@ const allowCrossDomain = (req, res, next) => {
 
 dotenv.load({ path: '.env' });
 
-app.set('port', (process.env.DEFAULT_PORT || 3000));
+app.set('port', (process.env.PORT || 8001));
 app.set('baseUrl', '/api');
 
 app.use(fileUpload());
