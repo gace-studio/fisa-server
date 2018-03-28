@@ -34,6 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(morgan('dev'));
+app.use(`/apidoc`, express.static('apidoc'));
 
 // for database
 mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true });
